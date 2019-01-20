@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% block head %}
+    <title>{% block title %}Word Counter{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+	{% block content1 %}
+<h1>Introduce text!</h1>
+<form action="index.php" method="POST">
+	<fieldset>
+        <label for="content">Text:</label>
+        <textarea id="content" name="content" required>{{ content }}</textarea><br>
+	</fieldset>
+	<fieldset>
+		<input type="submit" value="count!" />
+	</fieldset>
+	{% if wordNumber > 0 %}
+		<p>El número de palabras es {{ wordNumber }}</p>
+    {% endif %}
+</form>
+{% endblock %}
+</body>
+</html>
