@@ -2,9 +2,7 @@
 
 namespace Model;
 
-use Model\counter;
-
-class textcounter implements counter {
+class Textcounter {
 	private $content;
 
 	private $wordsNumber;

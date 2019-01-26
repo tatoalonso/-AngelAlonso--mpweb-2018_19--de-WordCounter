@@ -1,26 +1,14 @@
 <?php
-//tiwg
-require_once __DIR__ . '/vendor/autoload.php';
-$loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
-$twig = new Twig_Environment($loader, array('debug' => true));
 
-use Model\nullcounter;
+require_once __DIR__ . '/vendor/autoload.php';
+
 use Model\textcounter;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+$texto = "Esto es un texto molón que sirve como juego de pruebas para la kata de contar palabrejas. No me hagas un diseño de gañán ni de hiper-arquitecto. Que te veo, eh.";
 
-	$wordCounter = new textcounter($_POST['content']);
+$wordCounter = new textcounter($texto);
 
-} else {
-
-	$wordCounter = new nullcounter();
-
-}
-
-$variables = [
-	'wordNumber' => $wordCounter->wordsNumber(),
-	'content' => $wordCounter->content(),
-];
-echo $twig->render('index.twig', $variables);
+echo "El resultado de contar las palabras es: ";
+echo $wordCounter->wordsNumber() . PHP_EOL;
 
 ?>
