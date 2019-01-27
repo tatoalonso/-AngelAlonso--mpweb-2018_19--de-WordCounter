@@ -2,7 +2,7 @@
 
 namespace Model;
 
-class Textcounter {
+class Textcounter implements Counter {
 	private $content;
 
 	private $wordsNumber;
@@ -14,16 +14,23 @@ class Textcounter {
 	public function content() {
 		return $this->content;
 	}
-	public function countwords() {
-		$content = $this->content;
+
+	public function filterContent(string $text) {
+
 		$pattern = array("=", '+', '*', '/', ',', '.', ';', ':', '[', ']', '{', '}', '(', ')', '<', '>', '&', '%', '$', '@', '#', '^', '!', '?', '~');
-		$contentFiltered = str_replace($pattern, "", $content);
+		$contentFiltered = str_replace($pattern, "", $text);
 		$contentFiltered = trim($contentFiltered);
-		$this->wordsNumber = count(explode(" ", $contentFiltered));
+		$this->content = explode(" ", $contentFiltered);
+
+	}
+	public function countwords() {
+
+		$this->wordsNumber = count($this->content);
 	}
 
-	public function __construct(string $content) {
-		$this->content = filter_var($content, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+	public function __construct(string $text) {
+		$text = filter_var($text, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$this->filterContent($text);
 		$this->countwords();
 
 	}
