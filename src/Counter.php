@@ -3,7 +3,7 @@
 namespace Model;
 
 interface Counter {
-	public function countwords();
+	public function wordsNumber();
 };
 
 ?>

@@ -3,17 +3,31 @@
 namespace Model;
 
 class KeyWordsCounter implements Counter {
-	private $content;
-
-	private $counter;
-
-	private $wordsNumber;
-
-	private $arrayKeyWords;
+	public $content;
+	public $counter;
+	public $wordsMatched;
+	public $arrayKeyWords;
 
 	public function __construct(Textcounter $counter) {
 		$this->counter = $counter;
 		$this->content = $this->counter->content();
+		$this->countKeyWords();
+	}
+
+	public function wordsNumber() {
+		if ($this->wordsMatched == null) {
+			return 0;
+		} else {
+			return count($this->wordsMatched);
+		}
+
+	}
+
+	public function wordsMatched() {
+		return $this->wordsMatched;
+	}
+
+	public function countKeyWords() {
 		$this->arrayKeyWords = array(
 			"1" => "gañán",
 			"2" => "palabrejas",
@@ -21,24 +35,13 @@ class KeyWordsCounter implements Counter {
 			"4" => "que",
 			"5" => "eh",
 		);
-		$this->countwords();
-	}
-
-	public function wordsNumber() {
-		return $this->wordsNumber;
-	}
-
-	public function content() {
-		return $this->content;
-	}
-
-	public function countwords() {
 
 		foreach ($this->content as $value) {
 			if (array_search(strtolower($value), $this->arrayKeyWords)) {
-				$this->wordsNumber = $this->wordsNumber + 1;
+				$this->wordsMatched[] = $value;
 			}
 		}
+
 	}
 
 };
