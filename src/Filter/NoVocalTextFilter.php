@@ -4,7 +4,7 @@ namespace Model\Filter;
 
 class NoVocalTextFilter implements Filter {
 
-	public function filter(array $words):  ? array{
+	public function filter(array $words):  array{
 
 		$arrayVocal = array(
 			"1" => "a",

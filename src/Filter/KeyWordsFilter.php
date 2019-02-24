@@ -4,7 +4,7 @@ namespace Model\Filter;
 
 class KeyWordsFilter implements Filter {
 
-	public function filter(array $words ):  ? array{
+	public function filter(array $words ):  array{
 
 		$arrayKeyWords = array(
 
